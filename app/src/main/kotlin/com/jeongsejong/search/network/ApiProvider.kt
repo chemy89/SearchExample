@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
  */
 class ApiProvider {
 
-    fun <S> createService(serviceClass: Class<S>, context: Context): S {
+    fun <S> createService(serviceClass: Class<S>): S {
         val retrofit = Retrofit.Builder()
                 .baseUrl(AppConstant.KAKAO_SEARCH_BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())

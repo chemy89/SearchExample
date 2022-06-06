@@ -15,8 +15,7 @@ interface BookApi {
      *
      */
     @GET("book")
-    fun requestBookList(@HeaderMap headers: Map<String, String>,
-                        @Query("query") query: String,
+    fun requestBookList(@Query("query") query: String,
                         @Query("sort") sort: String,
                         @Query("page") page: Int,
                         @Query("size") size: Int): Observable<Books>
