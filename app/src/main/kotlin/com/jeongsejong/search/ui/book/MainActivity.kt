@@ -1,4 +1,4 @@
-package com.jeongsejong.search.ui.activity
+package com.jeongsejong.search.ui.book
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
