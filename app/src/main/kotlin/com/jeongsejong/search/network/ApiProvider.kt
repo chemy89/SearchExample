@@ -30,6 +30,7 @@ class ApiProvider {
             .addInterceptor { chain ->
                 val original = chain.request()
                 val requestBuilder = original.newBuilder()
+                requestBuilder.addHeader(AppConstant.AUTH_HEADER, AppConstant.KAKAO_APPKEY)
                 val request = requestBuilder.build()
                 chain.proceed(request)
             }.connectTimeout(5000L, TimeUnit.MILLISECONDS)
