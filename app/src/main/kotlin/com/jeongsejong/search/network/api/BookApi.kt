@@ -1,5 +1,6 @@
 package com.jeongsejong.search.network.api
 
+import com.jeongsejong.search.network.model.book.Books
 import com.jeongsejong.search.network.model.book.Documents
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -15,7 +16,10 @@ interface BookApi {
      */
     @GET("book")
     fun requestBookList(@HeaderMap headers: Map<String, String>,
-                        @Query("query") query: String): Observable<Documents>
+                        @Query("query") query: String,
+                        @Query("sort") sort: String,
+                        @Query("page") page: Int,
+                        @Query("size") size: Int): Observable<Books>
 
 
 }
