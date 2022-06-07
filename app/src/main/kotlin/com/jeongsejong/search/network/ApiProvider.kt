@@ -12,34 +12,36 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by jeongsejong on 2022/06/06
  */
-class ApiProvider {
+interface ApiProvider {
 
-    fun <S> createService(serviceClass: Class<S>): S {
-        val retrofit = Retrofit.Builder()
+    companion object {
+        fun <S> createService(serviceClass: Class<S>): S {
+            val retrofit = Retrofit.Builder()
                 .baseUrl(AppConstant.KAKAO_SEARCH_BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getOkHttpClient())
                 .build()
 
-        return retrofit.create(serviceClass)
-    }
+            return retrofit.create(serviceClass)
+        }
 
-    private fun getOkHttpClient(): OkHttpClient {
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor { chain ->
-                val original = chain.request()
-                val requestBuilder = original.newBuilder()
-                requestBuilder.addHeader(AppConstant.AUTH_HEADER, AppConstant.KAKAO_APPKEY)
-                val request = requestBuilder.build()
-                chain.proceed(request)
-            }.connectTimeout(5000L, TimeUnit.MILLISECONDS)
-            .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .hostnameVerifier { hostname, session -> true }
-            .retryOnConnectionFailure(true)
-            .build()
+        private fun getOkHttpClient(): OkHttpClient {
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor { chain ->
+                    val original = chain.request()
+                    val requestBuilder = original.newBuilder()
+                    requestBuilder.addHeader(AppConstant.AUTH_HEADER, AppConstant.KAKAO_APPKEY)
+                    val request = requestBuilder.build()
+                    chain.proceed(request)
+                }.connectTimeout(5000L, TimeUnit.MILLISECONDS)
+                .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .hostnameVerifier { hostname, session -> true }
+                .retryOnConnectionFailure(true)
+                .build()
 
-        return okHttpClient
+            return okHttpClient
+        }
     }
 
 

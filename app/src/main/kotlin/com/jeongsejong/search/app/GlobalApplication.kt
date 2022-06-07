@@ -25,7 +25,6 @@ class GlobalApplication : Application() {
 
     private fun initApplicationSetting() {
         val modules = module{
-            single { ApiProvider() }
             single { PreferenceManager(this@GlobalApplication) }
         }
 

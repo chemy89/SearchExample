@@ -29,6 +29,7 @@ ext {
     // android dependency
     app_compat_version = '1.4.2'
     ktx_core_version = '1.8.0'
+    activity_ktx_version = '1.4.0'
     constraintlayout_version = '2.1.4'
     material_version = '1.6.1'
 
